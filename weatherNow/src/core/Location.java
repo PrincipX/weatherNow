@@ -11,6 +11,7 @@ public class Location {
 	public String country;
 	public double latitude;
 	public double longitude;
+	public String timezone;
 	
 	public Location(String city) {
 		this.city = city;
@@ -19,10 +20,12 @@ public class Location {
 			this.country = null;
 			this.latitude = 999;
 			this.longitude = 999;
+			this.timezone = null;
 		} else {
 			this.country = (String) data.get("country");
 			this.latitude = (double) data.get("latitude");
 			this.longitude = (double) data.get("longitude");
+			this.timezone = (String) data.get("timezone");
 		}
 
 	}
