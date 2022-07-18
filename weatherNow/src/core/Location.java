@@ -15,7 +15,7 @@ public class Location {
 	
 	public Location(String city) {
 		this.city = city;
-		JSONObject data = getGeoLocation(city.replace(" ", "%20"));	// URL Encoding " "
+		JSONObject data = getGeoLocation(city.replaceAll(" ", "%20"));	// URL Encoding " "
 		if(data == null) {
 			this.country = null;
 			this.latitude = 999;
@@ -31,10 +31,10 @@ public class Location {
 	}
 	
 	private JSONObject getGeoLocation(String city) {
-		URL link = null;
+		URL url = null;
 		try {
-			link = new URL("https://geocoding-api.open-meteo.com/v1/search?name="+city);
-			HttpURLConnection conn = (HttpURLConnection) link.openConnection();
+			url = new URL("https://geocoding-api.open-meteo.com/v1/search?name="+city);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.connect();
 			if (conn.getResponseCode() != 200) {
@@ -42,7 +42,7 @@ public class Location {
 			} else {
 			  
 			    String inline = "";
-			    Scanner scanner = new Scanner(link.openStream());
+			    Scanner scanner = new Scanner(url.openStream());
 			  
 			   //Write all the JSON data into a string using a scanner
 			    while (scanner.hasNext()) {
